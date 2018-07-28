@@ -1,5 +1,5 @@
 module SkillsHelper
-    def selectable_skills
-        Skill.all.map { |s| [s.name, s.id] }
+    def skills_as_options(skills)
+        skills.map { |s| [s.name, s.id] }
     end
 end

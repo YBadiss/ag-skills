@@ -7,7 +7,12 @@
   </p>
   <p>
     <%= form.label :parent %><br>
-    <%= form.select :parent_id, options_for_select([[nil, nil]] + selectable_skills) %>
+    <!--
+    Only allow selecting top level skills (the ones which have no parent), to prevent
+    creating a tree of skills with multiple levels of depth.
+    -->
+    <%= form.select :parent_id, options_for_select(
+      [['-- No Parent --', nil]] + skills_as_options(Skill.top_level)) %>
   </p>
  
   <p>

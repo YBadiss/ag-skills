@@ -4,7 +4,6 @@
         <th>Name</th>
         <th>Parent</th>
         <th>Children</th>
-        <th>Descendants</th>
         <th>Users</th>
     </tr>
     <% @skills.each do |skill| %>
@@ -13,8 +12,7 @@
             <td><%= skill.name %></td>
             <td><%= skill.parent&.name %></td>
             <td><%= skill.children.map(&:name).join(', ') %></td>
-            <td><%= skill.descendants.map(&:name).join(', ') %></td>
-            <td><%= skill.users.map(&:id).join(', ') %></td>
+            <td><%= skill.all_users.map(&:id).join(', ') %></td>
         </tr>
     <% end %>
 </table>
