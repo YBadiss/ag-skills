@@ -1,0 +1,14 @@
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Parent</th>
+    </tr>
+    <% @skills.each do |skill| %>
+        <tr>
+            <td><%= skill.id %></td>
+            <td><%= skill.name %></td>
+            <td><%= skill.parent&.name %></td>
+        </tr>
+    <% end %>
+</table>
