@@ -1,0 +1,18 @@
+<h1>Point summary</h1>
+
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Points</th>
+        <th>Users Count</th>
+    </tr>
+    <% @summary.each do |s| %>
+        <tr>
+            <td><%= s[:id] %></td>
+            <td><%= s[:name] %></td>
+            <td><%= s[:points] %></td>
+            <td><%= s[:users_count] %></td>
+        </tr>
+    <% end %>
+</table>

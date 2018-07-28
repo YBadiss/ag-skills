@@ -7,7 +7,7 @@
   </p>
   <p>
     <%= form.label :parent %><br>
-    <%= form.select :parent_id, options_for_select(valid_parent_skills) %>
+    <%= form.select :parent_id, options_for_select([[nil, nil]] + selectable_skills) %>
   </p>
  
   <p>

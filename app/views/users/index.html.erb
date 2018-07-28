@@ -2,11 +2,13 @@
     <tr>
         <th>Id</th>
         <th>Points</th>
+        <th>Skill</th>
     </tr>
     <% @users.each do |user| %>
         <tr>
             <td><%= user.id %></td>
             <td><%= user.points %></td>
+            <td><%= user.skill.name %></td>
         </tr>
     <% end %>
 </table>

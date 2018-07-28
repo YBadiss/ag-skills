@@ -1,6 +1,4 @@
 class UsersController < ApplicationController
-    def new; end
-
     def create
         @user = User.new(user_hash)
         @user.save!
@@ -19,6 +17,6 @@ class UsersController < ApplicationController
     private
 
     def user_hash
-        params.require(:user).permit(:points)
+        params.require(:user).permit(:points, :skill_id)
     end
 end
