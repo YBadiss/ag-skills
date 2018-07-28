@@ -1,18 +1,27 @@
-<h1>Point summary</h1>
+<p>Here is the result of the second question, the summary of points by top level skill.</p>
+<p>
+    The question was to generate this summary using the SQL query of the first question,
+    but being in rails it made more sense to use the ORM.
+</p>
 
-<table>
-    <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Points</th>
-        <th>Users Count</th>
-    </tr>
-    <% @summary.each do |s| %>
+<p>So here are the results of both approaches (of course they should show the same data!).</p>
+
+<% @summaries.each do |title, summary| %>
+    <h3><%= title %></h3>
+    <table>
         <tr>
-            <td><%= s[:id] %></td>
-            <td><%= s[:name] %></td>
-            <td><%= s[:points] %></td>
-            <td><%= s[:users_count] %></td>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Points</th>
+            <th>Users Count</th>
         </tr>
-    <% end %>
-</table>
+        <% summary.each do |s| %>
+            <tr>
+                <td><%= s[:id] %></td>
+                <td><%= s[:name] %></td>
+                <td><%= s[:points] %></td>
+                <td><%= s[:users_count] %></td>
+            </tr>
+        <% end %>
+    </table>
+<% end %>
