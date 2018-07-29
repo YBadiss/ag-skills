@@ -5,9 +5,4 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     get users_url
     assert_response :success
   end
-
-  test "should get show" do
-    get users_url(id: 1)
-    assert_response :success
-  end
 end

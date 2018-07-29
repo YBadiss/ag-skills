@@ -93,6 +93,13 @@ Le code demandé est sur `master`.
 ```shell
 $ cd skills
 $ bundle install
-$ bin/rails server # L'app tourne sur http://localhost:3000/
-$ bin/rails test test # Pour lancer les tests
+$ bin/rails server
 ```
+
+L'app tourne sur `http://localhost:3000/`.
+La page d'accueil montre le résumé des points par skills. Le bouton `Reset to test state` mets
+la base de donnée dans l'état décrit par l'énoncé.
+
+Vous pouvez ajouter des `skills` et des `users`
+
+Pour lancer les tests, utilisez `bin/rails test test`.

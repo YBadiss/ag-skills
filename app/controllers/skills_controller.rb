@@ -6,10 +6,6 @@ class SkillsController < ApplicationController
         redirect_to skills_url
     end
 
-    def show
-        @skill = Skill.find(params[:id])
-    end
-
     def index
         @skills = Skill.all
     end

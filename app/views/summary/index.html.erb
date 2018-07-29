@@ -1,10 +1,12 @@
+<h1>Question 2</h1>
+
 <p>Here is the result of the second question, the summary of points by top level skill.</p>
 <p>
     The question was to generate this summary using the SQL query of the first question,
     but being in rails it made more sense to use the ORM.
 </p>
 
-<p>So here are the results of both approaches (of course they should show the same data!).</p>
+<p>So here are the results of both approaches (of course they should show the same numbers!).</p>
 
 <% @summaries.each do |title, summary| %>
     <h3><%= title %></h3>
@@ -25,6 +27,10 @@
         <% end %>
     </table>
 <% end %>
+
+<p>
+  <%= link_to 'Reset to test state', 'reset' %>
+</p>
 
 <hr/>
 

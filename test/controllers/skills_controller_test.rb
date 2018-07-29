@@ -5,9 +5,4 @@ class SkillsControllerTest < ActionDispatch::IntegrationTest
     get skills_url
     assert_response :success
   end
-
-  test "should get show" do
-    get skill_url(id: 1)
-    assert_response :success
-  end
 end
