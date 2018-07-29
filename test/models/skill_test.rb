@@ -36,24 +36,24 @@ class SkillTest < ActiveSupport::TestCase
   [:rails_summary, :sql_summary].each do |summary_fn|
     test "should produce correct #{summary_fn}" do
       expected_summary = [
-        {
-          id: 1,
-          name: 'Football',
-          users_count: 2,
-          points: 25
-        },
-        {
-            id: 2,
-            name: 'Basketball',
-            users_count: 2,
-            points: 20
-        },
-        {
-            id: 3,
-            name: 'Rugby',
-            users_count: 0,
-            points: 0
-        }
+          {
+              id: 1,
+              name: 'Football',
+              users_count: 2,
+              points: 25
+          },
+          {
+              id: 2,
+              name: 'Basketball',
+              users_count: 2,
+              points: 20
+          },
+          {
+              id: 3,
+              name: 'Rugby',
+              users_count: 0,
+              points: 0
+          }
       ].map(&:with_indifferent_access)
       actual_summary = Skill.send(summary_fn)
 

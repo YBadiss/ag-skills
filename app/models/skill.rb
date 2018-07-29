@@ -20,8 +20,8 @@ class Skill < ApplicationRecord
       {
           id: skill.id,
           name: skill.name,
-          users_count: all_users.size,
-          points: all_users.map(&:points).sum
+          points: all_users.map(&:points).sum,
+          users_count: all_users.size
       }
     end
     res.map(&:with_indifferent_access)
@@ -29,8 +29,8 @@ class Skill < ApplicationRecord
 
   def self.sql_summary
     res = ActiveRecord::Base.connection.execute <<-SQL
-      SELECT COALESCE(s1.id, s.id) AS id, COALESCE(s1.name, s.name) AS name, COUNT(u.id) AS users_count,
-             COALESCE(SUM(u.points), 0) AS points
+      SELECT COALESCE(s1.id, s.id) AS id, COALESCE(s1.name, s.name) AS name, COALESCE(SUM(u.points), 0) AS points,
+             COUNT(u.id) AS users_count
       FROM skills s
       LEFT JOIN users u ON u.skill_id = s.id
       LEFT JOIN skills s1 ON s1.id = s.parent_id

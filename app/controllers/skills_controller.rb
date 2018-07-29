@@ -1,18 +1,18 @@
 class SkillsController < ApplicationController
-    def create
-        @skill = Skill.new(skill_hash)
-        @skill.save!
+  def create
+    @skill = Skill.new(skill_hash)
+    @skill.save!
 
-        redirect_to skills_url
-    end
+    redirect_to skills_url
+  end
 
-    def index
-        @skills = Skill.all
-    end
+  def index
+    @skills = Skill.all
+  end
 
-    private
+  private
 
-    def skill_hash
-        params.require(:skill).permit(:name, :parent_id)
-    end
+  def skill_hash
+    params.require(:skill).permit(:name, :parent_id)
+  end
 end

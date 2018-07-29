@@ -5,7 +5,7 @@
 Voici la requête demandée:
 
 ```sql
-SELECT COALESCE(s1.id, s.id) AS id, COALESCE(s1.name, s.name) AS name, COUNT(u.id) AS users_count, COALESCE(SUM(u.points), 0) AS points
+SELECT COALESCE(s1.id, s.id) AS id, COALESCE(s1.name, s.name) AS name, COALESCE(SUM(u.points), 0) AS points, COUNT(u.id) AS users_count
 FROM skills s
 LEFT JOIN skills_users su ON s.id = su.skill_id
 LEFT JOIN users u ON u.id = su.user_id
@@ -23,7 +23,7 @@ utile dans le cas de relation `many-to-many`.
 Si l'on déplace l'id des skills dans la table `users` alors la requête devient
 
 ```sql
-SELECT COALESCE(s1.id, s.id) AS id, COALESCE(s1.name, s.name) AS name, COUNT(u.id) AS users_count, COALESCE(SUM(u.points), 0) AS points
+SELECT COALESCE(s1.id, s.id) AS id, COALESCE(s1.name, s.name) AS name, COALESCE(SUM(u.points), 0) AS points, COUNT(u.id) AS users_count
 FROM skills s
 LEFT JOIN users u ON u.skill_id = s.id
 LEFT JOIN skills s1 ON s1.id = s.parent_id
@@ -78,7 +78,7 @@ Par exemple, si `Footie` était l'enfant de `Foot`:
 Dans ce cas nous pourrions utiliser la requête suivante:
 
 ```sql
-SELECT COALESCE(st.parent_id, s.id) AS id, s.name AS name, COUNT(u.id) AS users_count, SUM(u.points) AS points
+SELECT COALESCE(st.parent_id, s.id) AS id, s.name AS name, SUM(u.points) AS points, COUNT(u.id) AS users_count
 FROM skills s
 JOIN "users" u ON u.skill_id = s.id
 LEFT JOIN skill_tree st ON st.child_id = s.id
@@ -91,8 +91,10 @@ GROUP BY COALESCE(st.parent_id, s.id);
 Le code demandé est sur `master`.
 
 ```shell
-$ cd skills
+$ git clone https://github.com/YBadiss/ag-skills.git
+$ cd ag-skills
 $ bundle install
+$ bin/rails db:migrate
 $ bin/rails server
 ```
 
