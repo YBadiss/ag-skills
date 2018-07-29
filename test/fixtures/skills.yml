@@ -1,9 +1,23 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
+football:
+  id: 1
+  name: Football
+
+basketball:
+  id: 2
+  name: Basketball
+
+rugby:
+  id: 3
+  name: Rugby
+
+foot:
+  id: 4
+  name: Foot
   parent_id: 1
 
-two:
-  name: MyString
-  parent_id: 1
+basket:
+  id: 5
+  name: Basket
+  parent_id: 2

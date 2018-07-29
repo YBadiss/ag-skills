@@ -1,7 +1,21 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  points: 1
+football_user:
+  id: 1
+  points: 10
+  skill_id: 1
 
-two:
-  points: 1
+basketball_user:
+  id: 2
+  points: 15
+  skill_id: 2
+
+foot_user:
+  id: 3
+  points: 15
+  skill_id: 4
+
+basket_user:
+  id: 4
+  points: 5
+  skill_id: 5

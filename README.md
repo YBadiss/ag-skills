@@ -25,7 +25,7 @@ Si l'on déplace l'id des skills dans la table `users` alors la requête devient
 ```sql
 SELECT COALESCE(s1.id, s.id) AS id, COALESCE(s1.name, s.name) AS name, COUNT(u.id) AS users_count, COALESCE(SUM(u.points), 0) AS points
 FROM skills s
-LEFT JOIN users u ON u.id = s.user_id
+LEFT JOIN users u ON u.skill_id = s.id
 LEFT JOIN skills s1 ON s1.id = s.parent_id
 GROUP BY COALESCE(s1.id, s.id);
 ```
@@ -34,10 +34,10 @@ Bien sûr cela demande plus d'effort lors d'une transition vers un modèle `many
 mais je ne pense pas que ce soit très important: Il parait étrange de toute façon que les
 points d'un utilisateur soient attribués à plusieurs skills en même temps.
 
-Malheureusement ces deux requêtes ne fonctionne que s'il y a un seul niveau de profondeur
-dans l'arbre des `skills`. C'est bien cette situation qui est décrite dans l'énoncé, et
-il ne semble pas vraiment logique d'avoir une telle arboresence pour ce qui est
-essentiellement des alias.
+Malheureusement ces deux requêtes ne fonctionne que s'il y a que deux niveaux de profondeur
+dans l'arbre des `skills` (parent + enfant). C'est bien cette situation qui est décrite
+dans l'énoncé, et il ne semble pas vraiment logique de toute façon d'avoir une arboresence
+plus complexe pour ce qui est essentiellement une liste d'alias.
 
 Si toutefois nous voulions une arborescence plus complexe, nous pourrions utiliser une
 stored procedure récursive, ou changer le modèle pour faciliter l'accès aux données.
@@ -94,11 +94,5 @@ Le code demandé est sur `master`.
 $ cd skills
 $ bundle install
 $ bin/rails server # L'app tourne sur http://localhost:3000/
+$ bin/rails test test # Pour lancer les tests
 ```
-
-
-TODO:
-
-- Allow deleting users and skills (and cascade)
-- Allow updating skill of a user, and parent of a skill
-- Add tests
