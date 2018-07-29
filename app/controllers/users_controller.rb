@@ -3,7 +3,7 @@ class UsersController < ApplicationController
         @user = User.new(user_hash)
         @user.save!
 
-        redirect_to @user
+        redirect_to users_url
     end
 
     def show

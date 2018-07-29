@@ -7,15 +7,37 @@ Voici la requête demandée:
 ```sql
 SELECT COALESCE(s1.id, s.id) AS id, COALESCE(s1.name, s.name) AS name, COUNT(u.id) AS users_count, COALESCE(SUM(u.points), 0) AS points
 FROM skills s
-LEFT JOIN users u ON s.id = u.skill_id
+LEFT JOIN skills_users su ON s.id = su.skill_id
+LEFT JOIN users u ON u.id = su.user_id
 LEFT JOIN skills s1 ON s1.id = s.parent_id
 GROUP BY COALESCE(s1.id, s.id);
 ```
 
-Malheureusement cette requête ne fonctionne que s'il y a un seul niveau de profondeur dans
-l'arbre des `skills`. C'est bien cette situation qui est décrite dans l'énoncé, et il ne
-semble pas vraiment logique d'avoir une telle arboresence pour ce qui est essentiellement
-des alias.
+Cependant, étant donné la limitation de l'énoncé
+
+> un utilisateur ne peut avoir qu'une seule compétence
+
+il me semble plus cohérent de ne pas avoir de table intermédiaire, qui est uniquement
+utile dans le cas de relation `many-to-many`.
+
+Si l'on déplace l'id des skills dans la table `users` alors la requête devient
+
+```sql
+SELECT COALESCE(s1.id, s.id) AS id, COALESCE(s1.name, s.name) AS name, COUNT(u.id) AS users_count, COALESCE(SUM(u.points), 0) AS points
+FROM skills s
+LEFT JOIN users u ON u.id = s.user_id
+LEFT JOIN skills s1 ON s1.id = s.parent_id
+GROUP BY COALESCE(s1.id, s.id);
+```
+
+Bien sûr cela demande plus d'effort lors d'une transition vers un modèle `many-to-many`
+mais je ne pense pas que ce soit très important: Il parait étrange de toute façon que les
+points d'un utilisateur soient attribués à plusieurs skills en même temps.
+
+Malheureusement ces deux requêtes ne fonctionne que s'il y a un seul niveau de profondeur
+dans l'arbre des `skills`. C'est bien cette situation qui est décrite dans l'énoncé, et
+il ne semble pas vraiment logique d'avoir une telle arboresence pour ce qui est
+essentiellement des alias.
 
 Si toutefois nous voulions une arborescence plus complexe, nous pourrions utiliser une
 stored procedure récursive, ou changer le modèle pour faciliter l'accès aux données.
@@ -77,7 +99,6 @@ $ bin/rails server # L'app tourne sur http://localhost:3000/
 
 TODO:
 
-- Add navigation between pages
 - Allow deleting users and skills (and cascade)
 - Allow updating skill of a user, and parent of a skill
 - Add tests

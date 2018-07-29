@@ -3,7 +3,7 @@ class SkillsController < ApplicationController
         @skill = Skill.new(skill_hash)
         @skill.save!
 
-        redirect_to @skill
+        redirect_to skills_url
     end
 
     def show
